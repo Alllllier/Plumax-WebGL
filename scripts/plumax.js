@@ -45,6 +45,7 @@ $(document).ready(function () {
         .add('images/trigo-active.png')
         .add('images/destroy.png')
         .load(setup);
+    $(window).resize(setScale);
 });
 
 function setScale() {
@@ -53,7 +54,8 @@ function setScale() {
     let ratio;
     ratio = height * 2 > width ? width / renderer.width : height / renderer.height;
     renderer.resize(renderer.width * ratio, renderer.height * ratio);
-    stage.scale.set(ratio, ratio);
+    stage.width = stage.width * ratio;
+    stage.height = stage.height * ratio;
 }
 
 // 准备工作放在这里
@@ -107,37 +109,6 @@ function setup() {
             }
         }
     }
-
-    // 测试旗标
-    // for (let i = 0; i < locations.length; i++) {
-    //     let point = new LocationFlag(locations[i]);
-    //     stage.addChild(point);
-    // }
-
-    // 测试棋子
-    // for (let i = 0; i < 3; i++) {
-    //     let singo = new Singo();
-    //     singo.setPosition(70 * (i + 1), 450);
-    //     stage.addChild(singo.sprite);
-    // }
-    //
-    // for (let i = 0; i < 3; i++) {
-    //     let trigo = new Trigo();
-    //     trigo.setPosition(70 * (i + 1), 510);
-    //     stage.addChild(trigo.sprite);
-    // }
-    //
-    // for (let i = 0; i < 3; i++) {
-    //     let trigo = new Oneway();
-    //     trigo.setPosition(70 * (i + 1), 570);
-    //     stage.addChild(trigo.sprite);
-    // }
-    //
-    // for (let i = 0; i < 3; i++) {
-    //     let trigo = new Destroy();
-    //     trigo.setPosition(70 * (i + 1), 630);
-    //     stage.addChild(trigo.sprite);
-    // }
 
     for (let i = 1; i <= 3; i++) {
         let player = new Player(i);
