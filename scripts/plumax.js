@@ -417,17 +417,13 @@ function checkGameOver() {
             let block = starts[i].block;
             if (block === 1 || block === 4) {
                 players[0].win();
-                return 'Player 1 wins'; // todo 测试用，删除
             } else if (block === 2 || block === 5) {
                 players[1].win();
-                return 'Player 2 wins'; // todo 测试用，删除
             } else if (block === 3 || block === 6) {
                 players[2].win();
-                return 'Player 3 wins'; // todo 测试用，删除
             }
         }
     }
-    return 'Game is not over'; // todo 测试用，删除
 }
 
 function isRouteFinished(location, end) {
@@ -581,16 +577,14 @@ Player.prototype = {
     },
 
     win: function () {
-        alert('Player' + this.id + ' Wins');
-
-        // let text = new PIXI.Text(
-        //     'Player' + this.id + ' Wins!',
-        //     {font: '48px impact'}
-        // );
-        // text.x = renderer.view.width / 2 - text.width / 2;
-        // text.y = renderer.view.height / 2 -text.height / 2;
-        // winStage.addChild(text);
-        // state = winState;
+        let text = new PIXI.Text(
+            'Player' + this.id + ' Wins!',
+            {font: '48px impact'}
+        );
+        text.x = renderer.view.width / 2 - text.width / 2;
+        text.y = renderer.view.height / 2 -text.height / 2;
+        winStage.addChild(text);
+        state = winState;
     },
 
     printPieces: function () {
