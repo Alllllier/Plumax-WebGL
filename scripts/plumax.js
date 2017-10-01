@@ -145,7 +145,6 @@ function setup() {
         players.push(player);
     }
 
-    window.scrollTo(0,1);
     setScale();
     gameLoop();
 }
