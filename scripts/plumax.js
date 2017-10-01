@@ -45,7 +45,6 @@ $(document).ready(function () {
         .add('images/trigo-active.png')
         .add('images/destroy.png')
         .load(setup);
-    setTimeout(function() { window.scrollTo(0, 1) }, 100);
 });
 
 function setScale() {
@@ -146,6 +145,7 @@ function setup() {
         players.push(player);
     }
 
+    window.scrollTo(0,1);
     setScale();
     gameLoop();
 }
