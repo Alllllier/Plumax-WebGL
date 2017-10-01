@@ -427,22 +427,25 @@ function checkGameOver() {
 }
 
 function isRouteFinished(location, end) {
+    let route = new Set();
+    route.add(location);
     for (let i = 0; i < location.to.length; i++) {
-        if (isRouteFinishedHelper(location, location, location.to[i], end)) {
+        if (isRouteFinishedHelper(location, location.to[i], end, route)) {
             return true;
         }
     }
     return false;
 }
 
-function isRouteFinishedHelper(start, from, location, end) {
-    if (location !== start) {
+function isRouteFinishedHelper(from, location, end, route) {
+    if (!route.has(location)) {
+        route.add(location);
         if (location === end) {
             return true;
         } else {
             for (let i = 0; i < location.to.length; i++) {
                 if (location.to[i] !== from) {
-                    if (isRouteFinishedHelper(start, location, location.to[i], end)) {
+                    if (isRouteFinishedHelper(location, location.to[i], end, route)) {
                         return true;
                     }
                 }
@@ -452,13 +455,12 @@ function isRouteFinishedHelper(start, from, location, end) {
     return false;
 }
 
-// activate所有与顶点链接的棋子，deactivate剩余
 function activateRoutes() {
     let activePieces = new Set();
     for (let i = 0; i < starts.length; i++) {
         activePieces.add(starts[i].piece);
         for (let j = 0; j < starts[i].to.length; j++) {
-            activateRoutesHelper(starts[i], starts[i], starts[i].to[j], activePieces);
+            activateRoutesHelper(starts[i], starts[i].to[j], activePieces);
         }
     }
     for (let i = 0; i < pieces.length; i++) {
@@ -470,12 +472,12 @@ function activateRoutes() {
     }
 }
 
-function activateRoutesHelper(start, from, location, activePieces) {
-    if (location !== start) { // 防止绕回来
+function activateRoutesHelper(from, location, activePieces) {
+    if (!activePieces.has(location.piece)) { // 防止绕回来
         activePieces.add(location.piece);
         for (let i = 0; i < location.to.length; i++) {
             if (location.to[i] !== from) {
-                activateRoutesHelper(start, location, location.to[i], activePieces);
+                activateRoutesHelper(location, location.to[i], activePieces);
             }
         }
     }
