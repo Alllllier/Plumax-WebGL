@@ -232,9 +232,13 @@ Piece.prototype.setSprite = function () {
     // todo 移动端touch
     this.sprite
         .on('mousedown', onPieceClickStart) // touchstart
+        .on('touchstart', onPieceClickStart)
         .on('mouseup', onPieceClickEnd) // touchend
+        .on('touchend', onPieceClickEnd)
         .on('mouseupoutside', onPieceClickEnd) // touchendoutside
-        .on('mousemove', onPieceClickMove); // touchmove
+        .on('touchendoutside', onPieceClickEnd)
+        .on('mousemove', onPieceClickMove) // touchmove
+        .on('touchmove', onPieceClickMove);
     this.sprite.father = this;
     this.sprite.attach = attach;
 };

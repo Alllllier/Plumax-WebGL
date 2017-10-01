@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b257d8e-7b8f-4149-86af-b9dff1160dae" name="Default" comment="" />
+    <list default="true" id="3b257d8e-7b8f-4149-86af-b9dff1160dae" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/plumax.js" afterPath="$PROJECT_DIR$/scripts/plumax.js" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,7 +20,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="132">
               <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
               <folding />
             </state>
@@ -27,8 +30,8 @@
       <file leaf-file-name="plumax.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/plumax.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="124" column="8" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="8" />
+            <state relative-caret-position="302">
+              <caret line="238" column="37" lean-forward="false" selection-start-line="238" selection-start-column="37" selection-end-line="238" selection-end-column="37" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -175,12 +178,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1506621990226</updated>
-      <workItem from="1506621991574" duration="50189000" />
+      <workItem from="1506621991574" duration="51315000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50189000" />
+    <option name="totallyTimeSpent" value="51315000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -223,7 +226,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/scripts/plumax.js</url>
-          <line>491</line>
+          <line>495</line>
           <properties />
           <option name="timeStamp" value="43" />
         </line-breakpoint>
@@ -264,7 +267,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="132">
           <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
@@ -272,8 +275,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/plumax.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="124" column="8" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="8" />
+        <state relative-caret-position="302">
+          <caret line="238" column="37" lean-forward="false" selection-start-line="238" selection-start-column="37" selection-end-line="238" selection-end-column="37" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
