@@ -252,22 +252,22 @@ function attach() {
         }
         if (distance < Math.floor(1 / 3 * SIDE_M)
             && ((this.father.rotation % 2 === locations[i].block % 2 && direction)
-            || (this.father.rotation % 2 !== locations[i].block % 2 && !direction))) {
+            || (this.father.rotation % 2 !== locations[i].block % 2 && !direction))) { // 位置正确
 
-            // 从Player手中移除
             let piece = this.father;
             let player = piece.player;
-            let index = player.pieces.indexOf(piece);
-            player.pieces.splice(index, 1); // 移除
-            let newPiece = randomPiece();
-            newPiece.player = player;
-            player.pieces.splice(index, 0, newPiece); // 添加
-            player.printPieces();
+
+            let placed = false; // 棋子是否被放置
 
             if (piece instanceof Destroy) {
                 if (locations[i].piece) { // 位置上有棋子
                     let originalPiece = locations[i].piece;
                     locations[i].piece = undefined;
+
+                    for (let j = 0; j < locations[i].from.length; j++) {
+                        let fromLocation = locations[i].from[j];
+                        fromLocation.to.splice(fromLocation.to.indexOf(locations[i]), 1);
+                    }
                     locations[i].from = [];
                     locations[i].to = [];
                     pieces.splice(pieces.indexOf(originalPiece), 1);
@@ -276,6 +276,7 @@ function attach() {
                     }
                     originalPiece.sprite.parent.removeChild(originalPiece.sprite);
                     this.parent.removeChild(this);
+                    placed = true
                 }
             } else {
                 if (!locations[i].piece) { // 位置上没有棋子
@@ -305,15 +306,23 @@ function attach() {
                     if (locations[i].isStart() && piece.ports[2] === Port.DOUBLE) {
                         starts.push(locations[i]);
                     }
+
+                    placed = true;
                 }
+            }
+
+            if (placed) {
+                let index = player.pieces.indexOf(piece);
+                player.pieces.splice(index, 1); // 移除
+                let newPiece = randomPiece();
+                newPiece.player = player;
+                player.pieces.splice(index, 0, newPiece); // 添加
+                player.printPieces();
             }
 
             activateRoutes();
 
-            let winner = isGameOver();
-            if (winner) {
-                winner.win();
-            }
+            checkGameOver();
         }
     }
 }
@@ -402,20 +411,23 @@ function Destroy() {
 }
 Destroy.prototype = new Piece();
 
-function isGameOver() {
+function checkGameOver() {
     for (let i = 0; i < starts.length; i++) {
         if (isRouteFinished(starts[i], starts[i].oppositeEnd)) {
             let block = starts[i].block;
             if (block === 1 || block === 4) {
                 players[0].win();
+                return 'Player 1 wins'; // todo 测试用，删除
             } else if (block === 2 || block === 5) {
                 players[1].win();
+                return 'Player 2 wins'; // todo 测试用，删除
             } else if (block === 3 || block === 6) {
                 players[2].win();
+                return 'Player 3 wins'; // todo 测试用，删除
             }
         }
     }
-    return null;
+    return 'Game is not over'; // todo 测试用，删除
 }
 
 function isRouteFinished(location, end) {
@@ -434,7 +446,7 @@ function isRouteFinishedHelper(start, from, location, end) {
         } else {
             for (let i = 0; i < location.to.length; i++) {
                 if (location.to[i] !== from) {
-                    if (isRouteFinishedHelper(location, location.to[i], end)) {
+                    if (isRouteFinishedHelper(start, location, location.to[i], end)) {
                         return true;
                     }
                 }
@@ -569,20 +581,26 @@ Player.prototype = {
     },
 
     win: function () {
-        let text = new PIXI.Text(
-            'Player' + this.id + ' Wins!',
-            {font: '48px impact'}
-        );
-        text.x = renderer.view.width / 2 - text.width / 2;
-        text.y = renderer.view.height / 2 -text.height / 2;
-        winStage.addChild(text);
-        state = winState;
+        alert('Player' + this.id + ' Wins');
+
+        // let text = new PIXI.Text(
+        //     'Player' + this.id + ' Wins!',
+        //     {font: '48px impact'}
+        // );
+        // text.x = renderer.view.width / 2 - text.width / 2;
+        // text.y = renderer.view.height / 2 -text.height / 2;
+        // winStage.addChild(text);
+        // state = winState;
     },
 
     printPieces: function () {
         for (let i = 0; i < 3; i++) {
             let piece = this.pieces[i];
             piece.sprite.position.set(50 + 70 * i, this.offsetY + 70);
+
+            // todo piece旋转复原
+            piece.rotation = 1; // 逻辑旋转复原
+            piece.sprite.rotation = 0; // GUI旋转复原
             stage.addChild(piece.sprite);
         }
     }
