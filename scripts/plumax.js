@@ -45,7 +45,17 @@ $(document).ready(function () {
         .add('images/trigo-active.png')
         .add('images/destroy.png')
         .load(setup);
+    setTimeout(function() { window.scrollTo(0, 1) }, 100);
 });
+
+function setScale() {
+    let width = $(window).width();
+    let height = $(window).height();
+    let ratio;
+    ratio = height * 2 > width ? width / renderer.width : height / renderer.height;
+    renderer.resize(renderer.width * ratio, renderer.height * ratio);
+    stage.scale.set(ratio, ratio);
+}
 
 // 准备工作放在这里
 function setup() {
@@ -136,6 +146,7 @@ function setup() {
         players.push(player);
     }
 
+    setScale();
     gameLoop();
 }
 
